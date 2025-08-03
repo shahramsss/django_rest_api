@@ -6,4 +6,5 @@ urlpatterns = [
     # path("home/", views.home, name="home"),
     path("home/", views.Home.as_view(), name="home"),
     path("persons/", views.PersonView.as_view(), name="persons"),
+    path("questions/", views.QuestionView.as_view(), name="questions"),
 ]
