@@ -57,4 +57,6 @@ class QuestionView(APIView):
         return Response(data=ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        pass
+        question = Question.objects.get(pk=pk)
+        question.delete()
+        return Response({"message": "question deleted"})
