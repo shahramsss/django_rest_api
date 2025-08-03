@@ -40,15 +40,21 @@ class QuestionView(APIView):
         return Response(data=ser_data.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        ser_data = QuestionSerializer(data = request.data)
+        ser_data = QuestionSerializer(data=request.data)
         if ser_data.is_valid():
             ser_data.save()
-            return Response(data=ser_data.data , status=status.HTTP_201_CREATED)
-        return Response(data=ser_data.errors , status=status.HTTP_400_BAD_REQUEST)
-        
+            return Response(data=ser_data.data, status=status.HTTP_201_CREATED)
+        return Response(data=ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
-        pass
+        question = Question.objects.get(pk=pk)
+        ser_data = QuestionSerializer(
+            instance=question, data=request.data, partial=True
+        )
+        if ser_data.is_valid():
+            ser_data.save()
+            return Response(data=ser_data.data, status=status.HTTP_201_CREATED)
+        return Response(data=ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
         pass
