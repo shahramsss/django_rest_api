@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from .serializers import UserRegisterSerializer
+from rest_framework import status
 
 
 class UserRegister(APIView):
@@ -14,5 +15,5 @@ class UserRegister(APIView):
             #     password=ser_data.validated_data["password"],
             # )
             ser_data.create(ser_data.validated_data)
-            return Response(data=ser_data.data, status=201)
-        return Response(data=ser_data.errors, status=400)
+            return Response(data=ser_data.data, status=status.HTTP_201_CREATED)
+        return Response(data=ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
