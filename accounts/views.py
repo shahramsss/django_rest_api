@@ -44,3 +44,9 @@ class UserViewset(viewsets.ViewSet):
             ser_data.save()
             return Response(data=ser_data.data, status=status.HTTP_201_CREATED)
         return Response(data=ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk=None):
+        user = get_object_or_404(self.queryset, pk=pk)
+        user.is_active = False
+        user.save()
+        return Response({"message": "user deactivated"})
