@@ -84,7 +84,9 @@ class QuestionCreateView(APIView):
 
 
 class QuestionUpdateView(APIView):
-    permission_classes = [IsAuthenticated, IsOwnerOrReadonly]
+    permission_classes = [
+        IsOwnerOrReadonly,
+    ]
 
     def put(self, request, pk):
         question = Question.objects.get(pk=pk)
@@ -99,6 +101,9 @@ class QuestionUpdateView(APIView):
 
 
 class QuestionDeleteView(APIView):
+    permission_classes = [
+        IsOwnerOrReadonly,
+    ]
 
     def delete(self, request, pk):
         question = Question.objects.get(pk=pk)

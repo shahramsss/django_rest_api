@@ -1,8 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from .serializers import UserRegisterSerializer
+from .serializers import UserRegisterSerializer, UserSerializer
 from rest_framework import status
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 
 class UserRegister(APIView):
@@ -17,3 +19,14 @@ class UserRegister(APIView):
             ser_data.create(ser_data.validated_data)
             return Response(data=ser_data.data, status=status.HTTP_201_CREATED)
         return Response(data=ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserViewset(viewsets.ViewSet):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    queryset = User.objects.all()
+
+    def list(self, request):
+        ser_data = UserSerializer(instance=self.queryset, many=True)
+        return Response(data=ser_data.data, status=status.HTTP_200_OK)

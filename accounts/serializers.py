@@ -47,3 +47,9 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         del validated_data["password2"]
         return User.objects.create(**validated_data)
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
