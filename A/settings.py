@@ -134,5 +134,13 @@ REST_FRAMEWORK = {
         # سایر روش‌ها (در صورت نیاز)
         # 'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework.authentication.BasicAuthentication',
-    ]
+    ],
+    # 'DEFAULT_THROTTLE_CLASSES':[
+    #     'rest_framework.throttling.AnonRateThrottle'
+    #     'rest_framework.throttling.UserRateThrottle'
+    # ],
+    'DEFAULT_THROTTLE_RATES':{
+        'anon':'3/hour',
+        'user':'10/hour',
+    }
 }

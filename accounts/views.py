@@ -6,6 +6,7 @@ from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 
 
 class UserRegister(APIView):
@@ -23,6 +24,7 @@ class UserRegister(APIView):
 
 
 class UserViewset(viewsets.ViewSet):
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
     permission_classes = [
         IsAuthenticated,
     ]
@@ -39,6 +41,8 @@ class UserViewset(viewsets.ViewSet):
 
     def partial_update(self, request, pk=None):
         user = get_object_or_404(self.queryset, pk=pk)
+        if user != request.user:
+            return Response({"messages": "Permission denied: you are not owner!"})
         ser_data = UserSerializer(instance=user, data=request.data, partial=True)
         if ser_data.is_valid():
             ser_data.save()
@@ -47,6 +51,8 @@ class UserViewset(viewsets.ViewSet):
 
     def destroy(self, request, pk=None):
         user = get_object_or_404(self.queryset, pk=pk)
+        if user != request.user:
+            return Response({"messages": "Permission denied: you are not owner!"})
         user.is_active = False
         user.save()
         return Response({"message": "user deactivated"})
