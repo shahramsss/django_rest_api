@@ -36,3 +36,11 @@ class UserViewset(viewsets.ViewSet):
         user = get_object_or_404(self.queryset, pk=pk)
         ser_data = UserSerializer(instance=user)
         return Response(data=ser_data.data, status=status.HTTP_200_OK)
+
+    def partial_update(self, request, pk=None):
+        user = get_object_or_404(self.queryset, pk=pk)
+        ser_data = UserSerializer(instance=user, data=request.data, partial=True)
+        if ser_data.is_valid():
+            ser_data.save()
+            return Response(data=ser_data.data, status=status.HTTP_201_CREATED)
+        return Response(data=ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
