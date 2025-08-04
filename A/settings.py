@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # third apps
     "rest_framework",
     "rest_framework.authtoken",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -141,6 +142,7 @@ REST_FRAMEWORK = {
         "rest_framework.throttling.UserRateThrottle",
         "rest_framework.throttling.ScopedRateThrottle",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     # "DEFAULT_RENDERER_CLASSES": [
     #     # "rest_framework.renderers.JSONRenderer",
     #     # "rest_framework.renderers.BrowsableAPIRenderer",
