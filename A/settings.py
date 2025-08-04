@@ -130,7 +130,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        # "rest_framework.authentication.TokenAuthentication",
         # سایر روش‌ها (در صورت نیاز)
         # 'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework.authentication.BasicAuthentication',
@@ -142,11 +143,14 @@ REST_FRAMEWORK = {
     ],
     # "DEFAULT_RENDERER_CLASSES": [
     #     # "rest_framework.renderers.JSONRenderer",
-    #     "rest_framework.renderers.BrowsableAPIRenderer",
+    #     # "rest_framework.renderers.BrowsableAPIRenderer",
+    #     # "rest_framework.renderers.AdminRenderer",
+    #     # 'rest_framework.renderers.TemplateHTMLRenderer',
+    #     # 'rest_framework.renderers.StaticHTMLRenderer',
     # ],
-    "DEFAULT_THROTTLE_RATES": {
-        "questions": "5/hour",
-        "anon": "3/hour",
-        "user": "10/hour",
-    },
+    # "DEFAULT_THROTTLE_RATES": {
+    #     "questions": "5/hour",
+    #     "anon": "3/hour",
+    #     "user": "10/hour",
+    # },
 }

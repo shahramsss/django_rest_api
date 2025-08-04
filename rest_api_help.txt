@@ -1,0 +1,104 @@
+REST_FRAMEWORK:
+
+ماژول `rest_framework.renderers` در Django REST Framework (DRF) مسئول **تبدیل داده‌ها به فرمت خروجی نهایی** است (مثل JSON، HTML، XML و ...). به این فرایند «rendering» می‌گویند.
+
+---
+
+## ✅ مهم‌ترین `Renderer`های DRF:
+
+### 1. `JSONRenderer` ✅ (پیش‌فرض)
+
+برای خروجی JSON استفاده می‌شود:
+
+```python
+'rest_framework.renderers.JSONRenderer'
+```
+
+* خروجی استاندارد API
+* برای استفاده در برنامه‌ها، موبایل و JavaScript
+
+---
+
+### 2. `BrowsableAPIRenderer` 🌐
+
+برای نمایش قابل خواندن API در مرورگر (مناسب برای توسعه و تست):
+
+```python
+'rest_framework.renderers.BrowsableAPIRenderer'
+```
+
+* نمایش فرم‌های HTML برای ارسال درخواست
+* مفید برای توسعه‌دهنده‌ها
+
+---
+
+### 3. `AdminRenderer` (کمتر استفاده می‌شود)
+
+نمایش شبیه به پنل Django admin برای API:
+
+```python
+'rest_framework.renderers.AdminRenderer'
+```
+
+---
+
+### 4. `TemplateHTMLRenderer`
+
+برای نمایش پاسخ HTML با قالب `template`:
+
+```python
+'rest_framework.renderers.TemplateHTMLRenderer'
+```
+
+---
+
+### 5. `StaticHTMLRenderer`
+
+خروجی مستقیم HTML به عنوان string، بدون استفاده از قالب:
+
+```python
+'rest_framework.renderers.StaticHTMLRenderer'
+```
+
+---
+
+## ✅ تنظیم در `settings.py`
+
+مثلاً اگر بخوای فقط خروجی JSON بده:
+
+```python
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ]
+}
+```
+
+اگر بخوای هم JSON باشه هم browsable API برای مرورگر:
+
+```python
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}
+```
+
+---
+
+## ✅ تنظیم سطح view (اختیاری)
+
+همچنین می‌تونی در view خاص رندرها رو override کنی:
+
+```python
+from rest_framework.renderers import JSONRenderer
+from rest_framework.views import APIView
+
+class MyView(APIView):
+    renderer_classes = [JSONRenderer]
+
+    def get(self, request):
+        return Response({'message': 'Hello JSON!'})
+```
+--------------------------------------------------------------------

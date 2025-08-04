@@ -26,9 +26,9 @@ class UserRegister(APIView):
 class UserViewset(viewsets.ViewSet):
     # throttle_classes = [UserRateThrottle, AnonRateThrottle]
     # throttle_scope = "questions"
-    # permission_classes = [
-    #     IsAuthenticated,
-    # ]
+    permission_classes = [
+        IsAuthenticated,
+    ]
     queryset = User.objects.all()
 
     def list(self, request):
