@@ -5,6 +5,7 @@ from .serializers import UserRegisterSerializer, UserSerializer
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import get_object_or_404
 
 
 class UserRegister(APIView):
@@ -29,4 +30,9 @@ class UserViewset(viewsets.ViewSet):
 
     def list(self, request):
         ser_data = UserSerializer(instance=self.queryset, many=True)
+        return Response(data=ser_data.data, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, pk=None):
+        user = get_object_or_404(self.queryset, pk=pk)
+        ser_data = UserSerializer(instance=user)
         return Response(data=ser_data.data, status=status.HTTP_200_OK)
