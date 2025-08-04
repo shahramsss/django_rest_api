@@ -135,12 +135,18 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework.authentication.BasicAuthentication',
     ],
-    # 'DEFAULT_THROTTLE_CLASSES':[
-    #     'rest_framework.throttling.AnonRateThrottle'
-    #     'rest_framework.throttling.UserRateThrottle'
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+        "rest_framework.throttling.ScopedRateThrottle",
+    ],
+    # "DEFAULT_RENDERER_CLASSES": [
+    #     # "rest_framework.renderers.JSONRenderer",
+    #     "rest_framework.renderers.BrowsableAPIRenderer",
     # ],
-    'DEFAULT_THROTTLE_RATES':{
-        'anon':'3/hour',
-        'user':'10/hour',
-    }
+    "DEFAULT_THROTTLE_RATES": {
+        "questions": "5/hour",
+        "anon": "3/hour",
+        "user": "10/hour",
+    },
 }

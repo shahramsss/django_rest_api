@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
-from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle 
 
 
 class UserRegister(APIView):
@@ -24,10 +24,11 @@ class UserRegister(APIView):
 
 
 class UserViewset(viewsets.ViewSet):
-    throttle_classes = [UserRateThrottle, AnonRateThrottle]
-    permission_classes = [
-        IsAuthenticated,
-    ]
+    # throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    # throttle_scope = "questions"
+    # permission_classes = [
+    #     IsAuthenticated,
+    # ]
     queryset = User.objects.all()
 
     def list(self, request):
