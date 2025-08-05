@@ -155,4 +155,6 @@ REST_FRAMEWORK = {
     #     "anon": "3/hour",
     #     "user": "10/hour",
     # },
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 2,  # تعداد آیتم در هر صفحه
 }
