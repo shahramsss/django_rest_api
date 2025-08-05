@@ -25,6 +25,10 @@ class UserRegister(APIView):
 
 
 class UserViewset(viewsets.ViewSet):
+    """
+    user list
+    """
+
     # throttle_classes = [UserRateThrottle, AnonRateThrottle]
     # throttle_scope = "questions"
     permission_classes = [
@@ -33,6 +37,7 @@ class UserViewset(viewsets.ViewSet):
     queryset = User.objects.all()
 
     def list(self, request):
+
         page_number = request.query_params.get("page", 1)
         page_size = request.query_params.get("limit", 2)
         paginator = Paginator(self.queryset, page_size)

@@ -157,4 +157,5 @@ REST_FRAMEWORK = {
     # },
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 2,  # تعداد آیتم در هر صفحه
+    'DEFAULT_METADATA_CLASS': 'permissions.CustomMetadata',
 }
